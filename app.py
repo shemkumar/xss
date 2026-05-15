@@ -12,12 +12,13 @@ def index():
 def result():
     
     user_input = request.args.get("input")
-    user_input_temp = user_input.lower()
-    user_input_temp = user_input_temp.replace("script","")
-    if (("img" in user_input_temp) and ("alert" in user_input_temp or "onerror" in user_input_temp) and ("<" in user_input_temp) and (">" in user_input_temp)):
-        
-        user_input_temp =  '<img src =q onerror=prompt("root@localhost{Byp4ss_Sanitiz3r_123}")>'
-    return render_template('results.html',user_input=user_input,user_input_temp=user_input_temp)
+    # Remove the problematic XSS payload logic
+    # Jinja2 auto-escapes by default, so direct rendering of user_input is safe
+    # unless |safe or Markup() is explicitly used in the template.
+    # The original logic attempted to sanitize but introduced a hardcoded payload.
+    # We will rely on Jinja2's default auto-escaping.
+    
+    return render_template('results.html',user_input=user_input)
 
 if __name__ == "__main__":
     app.run(debug=False)
