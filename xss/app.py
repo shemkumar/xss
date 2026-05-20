@@ -16,7 +16,7 @@ def result():
     user_input_temp = user_input_temp.replace("script","")
     if (("img" in user_input_temp) and ("alert" in user_input_temp or "onerror" in user_input_temp) and ("<" in user_input_temp) and (">" in user_input_temp)):
         
-        user_input_temp =  '<img src =q onerror=prompt("root@localhost{Byp4ss_Sanitiz3r_123}")>'
+        user_input_temp =  '<img src =q onerror=prompt("XSS_Attempt_Detected")>'
     return render_template('results.html',user_input=user_input,user_input_temp=user_input_temp)
 
 if __name__ == "__main__":
