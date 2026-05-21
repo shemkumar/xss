@@ -16,15 +16,10 @@ def result():
     # Escape user_input immediately to prevent XSS
     escaped_user_input = escape(user_input)
     
-    # The original logic for user_input_temp seems to be an attempt at sanitization
-    # or a demonstration of a bypass. Given the finding, it's safer to escape this as well.
-    # If the intent was to allow some HTML, a robust HTML sanitization library should be used.
-    # For now, we'll escape it to prevent XSS.
-    user_input_temp = user_input.lower()
-    user_input_temp = user_input_temp.replace("script","")
-    if (("img" in user_input_temp) and ("alert" in user_input_temp or "onerror" in user_input_temp) and ("<" in user_input_temp) and (">" in user_input_temp)):
-        
-        user_input_temp =  '<img src =q onerror=prompt("root@localhost{Byp4ss_Sanitiz3r_123}")>'
+    # The original logic for user_input_temp was flawed and introduced a guaranteed XSS.
+    # It's removed to prevent this vulnerability. All user input should be escaped.
+    # If specific HTML tags are required, a robust HTML sanitization library should be used.
+    user_input_temp = user_input # Assign original user_input to user_input_temp
     
     # Escape user_input_temp before passing it to the template
     escaped_user_input_temp = escape(user_input_temp)
